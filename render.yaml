@@ -1,15 +1,19 @@
+previewsEnabled: false
+
 databases:
   - name: lightdash-database
+    ipAllowList: [ ]
     plan: starter
     region: frankfurt
+
 services:
   - type: web
     name: lightdash-server
     runtime: docker
-    plan: standard
-    region: frankfurt
     dockerContext: .
     dockerfilePath: dockerfile
+    plan: standard
+    region: frankfurt
     envVars:
       - key: PGHOST
         fromDatabase:
