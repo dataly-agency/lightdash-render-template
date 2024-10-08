@@ -24,7 +24,7 @@ to either:
 
 ## IP addresses for datawarehouse access
 
-Your data warehouse may require you to add an IP address for your Lightdsah instance to access the warehouse.
+Your data warehouse may require you to add an IP address for your Lightdash instance to access the warehouse.
 
 
 For instructions to get the IP address follow this guide: https://render.com/docs/static-outbound-ip-addresses
