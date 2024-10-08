@@ -8,12 +8,14 @@ databases:
 
 services:
   - type: web
-    name: lightdash-server
-    runtime: docker
-    dockerContext: .
-    dockerfilePath: dockerfile
     plan: standard
     region: frankfurt
+    env: docker
+    name: lightdash-server
+    dockerContext: .
+    dockerfilePath: dockerfile
+    domains:
+      - lightdash.deserved.cz
     envVars:
       - key: PGHOST
         fromDatabase:
@@ -41,4 +43,3 @@ services:
         value: true
       - key: LIGHTDASH_SECRET
         generateValue: true
-
