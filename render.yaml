@@ -2,44 +2,47 @@ previewsEnabled: false
 
 databases:
   - name: lightdash-database
-    ipAllowList: [ ]
+    databaseName: lightdash_database_dms
+    user: lightdash_database_dms_user
     plan: starter
     region: frankfurt
+    ipAllowList: [ ]
 
 services:
   - type: web
-    plan: standard
-    region: frankfurt
-    env: docker
     name: lightdash-server
-    dockerContext: .
-    dockerfilePath: dockerfile
-    domains:
-      - lightdash.deserved.cz
+    runtime: docker
+    repo: https://github.com/dataly-agency/lightdash-render-template
+    plan: standard
     envVars:
-      - key: PGHOST
-        fromDatabase:
-          name: lightdash-database
-          property: host
-      - key: PGPORT
-        fromDatabase:
-          name: lightdash-database
-          property: port
-      - key: PGDATABASE
-        fromDatabase:
-          name: lightdash-database
-          property: database
-      - key: PGUSER
-        fromDatabase:
-          name: lightdash-database
-          property: user
+      - key: LIGHTDASH_SECRET
+        generateValue: true
+      - key: SECURE_COOKIES
+        value: true
+      - key: TRUST_PROXY
+        value: true
       - key: PGPASSWORD
         fromDatabase:
           name: lightdash-database
           property: password
-      - key: TRUST_PROXY
-        value: true
-      - key: SECURE_COOKIES
-        value: true
-      - key: LIGHTDASH_SECRET
-        generateValue: true
+      - key: PGUSER
+        fromDatabase:
+          name: lightdash-database
+          property: user
+      - key: PGDATABASE
+        fromDatabase:
+          name: lightdash-database
+          property: database
+      - key: PGPORT
+        fromDatabase:
+          name: lightdash-database
+          property: port
+      - key: PGHOST
+        fromDatabase:
+          name: lightdash-database
+          property: host
+    region: frankfurt
+    dockerContext: .
+    dockerfilePath: dockerfile
+    domains:
+      - lightdash.deserved.cz
