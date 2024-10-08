@@ -2,7 +2,6 @@ databases:
   - name: lightdash-database
     plan: starter
     region: frankfurt
-    ipAllowList: [ ]
 services:
   - type: web
     name: lightdash-server
@@ -11,9 +10,6 @@ services:
     region: frankfurt
     dockerContext: .
     dockerfilePath: dockerfile
-    domains:
-      - lightdash.dataly.cz
-      - lightdash.deserved.cz
     envVars:
       - key: PGHOST
         fromDatabase:
